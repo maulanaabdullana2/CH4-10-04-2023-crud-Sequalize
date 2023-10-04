@@ -91,9 +91,32 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+const findProductById = async (req, res) => {
+  try {
+    const product = await Product.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        product,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "failed",
+      mesagge: err.mesagge,
+    });
+  }
+};
+
 module.exports = {
   createProduct,
   findProducts,
   updateProduct,
   deleteProduct,
+  findProductById,
 };
