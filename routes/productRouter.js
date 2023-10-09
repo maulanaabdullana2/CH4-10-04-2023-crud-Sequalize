@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Product = require("../controller/productController");
-
-router.post("/", Product.createProduct);
+const upload = require("../middlewares/uploader");
+router.post("/", upload.single("image"), Product.createProduct);
 router.get("/", Product.findProducts);
 router.get("/:id", Product.findProductById);
 router.patch("/:id", Product.updateProduct);
